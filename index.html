@@ -55,7 +55,33 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;justify-content
 .nav-btn:hover{background:transparent;color:var(--accent)}
 .nav-btn.ghost{background:transparent;color:var(--accent)}
 .nav-btn.ghost:hover{background:var(--accent);color:#000}
-@media(max-width:768px){nav{padding:12px 20px}.nav-center{display:none}.nav-right{gap:8px}.nav-btn{padding:7px 12px;font-size:9px}}
+
+/* BURGER */
+.nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;background:none;border:none;cursor:pointer;padding:4px;z-index:310}
+.nav-burger span{display:block;width:22px;height:1.5px;background:rgba(255,255,255,.8);transition:all .3s;transform-origin:center}
+.nav-burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-burger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+/* MOBILE MENU OVERLAY */
+.nav-mobile{display:none;position:fixed;inset:0;top:0;z-index:299;background:rgba(8,8,8,.97);backdrop-filter:blur(16px);flex-direction:column;align-items:center;justify-content:center;gap:0;opacity:0;pointer-events:none;transition:opacity .3s}
+.nav-mobile.open{opacity:1;pointer-events:all}
+.nav-mobile a{font-family:var(--syne);font-size:28px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.45);text-decoration:none;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.06);width:100%;text-align:center;transition:color .25s}
+.nav-mobile a:hover,.nav-mobile a:active{color:var(--accent)}
+.nav-mobile-contacts{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px;justify-content:center;padding:0 24px}
+.nav-mobile-contacts a{font-family:var(--syne);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:10px 20px;text-decoration:none;color:#000;background:var(--accent);border:2px solid var(--accent);width:auto;border-bottom:none}
+
+/* Telegram кнопка в мобильной шапке */
+.nav-tg-mobile{display:none}
+@media(max-width:768px){
+  nav{padding:12px 20px}
+  .nav-center{display:none}
+  .nav-right{display:none}
+  .nav-burger{display:flex}
+  .nav-mobile{display:flex}
+  .nav-tg-mobile{display:inline-flex;align-items:center;font-family:var(--syne);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#000;background:var(--accent);border:2px solid var(--accent);padding:7px 14px;text-decoration:none;white-space:nowrap;transition:all .22s}
+  .nav-tg-mobile:hover{background:transparent;color:var(--accent)}
+}
 
 /* HERO with parallax */
 .hero{position:relative;width:100%;height:100vh;overflow:hidden}
@@ -73,7 +99,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;justify-content
 
 /* HERO CONTENT */
 .hero-content{position:absolute;inset:0;z-index:3;padding:0 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:22px;opacity:0;animation:fadeIn .9s .3s ease forwards;padding-top:72px}
-.hero-name{font-family:var(--syne);font-weight:600;font-size:34px;line-height:1;letter-spacing:.04em;text-transform:uppercase;color:#fff}
+.hero-name{font-family:var(--syne);font-weight:600;font-size:clamp(22px,6vw,34px);line-height:1;letter-spacing:.04em;text-transform:uppercase;color:#fff}
 .hero-tagline{font-size:clamp(13px,1.3vw,16px);color:rgba(255,255,255,.55);font-weight:300;max-width:520px;line-height:1.7;letter-spacing:.01em}
 .hero-tagline em{color:rgba(255,255,255,.85);font-style:normal}
 .hero-stats{display:flex;gap:24px;align-items:center;justify-content:center}
@@ -93,8 +119,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;justify-content
 @media(max-width:768px){
   .hero-content{gap:18px}
   .hero-stat{padding:12px 18px}
-  .hero-btns{gap:10px}
-  .hero-btn{padding:12px 20px;font-size:9px}
+  .hero-btns{gap:10px;flex-direction:column;align-items:stretch;width:100%;max-width:320px}
+  .hero-btn{padding:12px 20px;font-size:9px;min-width:0;width:100%}
 }
 
 
@@ -195,7 +221,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;justify-content
 .admin-mode body,.admin-mode *{cursor:auto!important}
 .admin-mode .feat-item,.admin-mode .g-item{cursor:grab!important}
 .admin-mode button,.admin-mode .add-ph,.admin-mode .iac-btn,.admin-mode .ms-add-thumb{cursor:pointer!important}
-@media(max-width:900px){.gal-grid{grid-template-columns:repeat(2,1fr);gap:16px}}
+@media(max-width:900px){.gal-grid{grid-template-columns:repeat(2,1fr);gap:16px;padding:0 16px}}
 
 /* GAL SHOW-MORE */
 .g-item.gal-hidden{display:none}
@@ -442,11 +468,11 @@ const DEF_GAL=[{"id":1778510441870,"src":"img/gal/60_bas_13.webp"},{"id":1778510
 const DEF_MOD=[{"id":1778510441790,"name":"New York Corner Building Restaurant","software":"3ds Max, Substance Painter, RizomUV","polys":"85921","verts":"99173","desc":"","src":"img/models/nycbr.webp","wire":"img/models/nycbr_wire.webp","uv":"img/models/nycbr_uv.webp"},{"id":1778510441791,"name":"New York Decor Shop Building","software":"3ds Max, Substance Painter, RizomUV","polys":"22807","verts":"29946","desc":"","src":"img/models/nydsb.webp","wire":"img/models/nydsb_wire.webp","uv":"img/models/nydsb_uv.webp"},{"id":1778510441792,"name":"New York 29 Howard Street Building","software":"3ds Max, Substance Painter, RizomUV","polys":"36696","verts":"48954","desc":"","src":"img/models/ny29.webp","wire":"img/models/ny29_wire.webp","uv":"img/models/ny29_uv.webp"},{"id":1778510441793,"name":"Falcon 9 SpaceX","software":"3ds Max, Substance Painter, RizomUV","polys":"58499","verts":"67955","desc":"","src":"img/models/spacex.webp","wire":"img/models/spacex_wire.webp","uv":"img/models/spacex_uv.webp"},{"id":1778510441794,"name":"Yacht Picnic Boat","software":"3ds Max, Substance Painter, RizomUV","polys":"18684","verts":"21939","desc":"","src":"img/models/ypb.webp","wire":"img/models/ypb_wire.webp","uv":"img/models/ypb_uv.webp"},{"id":1778510441795,"name":"CoffeeShop Black White Set","software":"3ds Max, Substance Painter, RizomUV","polys":"31698","verts":"36426","desc":"","src":"img/models/cbws.webp","wire":"img/models/cbws_wire.webp","uv":"img/models/cbws_uv.webp"},{"id":1778510441797,"name":"Garden Furniture and Cactus Set","software":"3ds Max, Substance Painter, RizomUV","polys":"20371","verts":"21718","desc":"","src":"img/models/gfcs.webp","wire":"img/models/gfcs_wire.webp","uv":"img/models/gfcs_uv.webp"},{"id":1778510441798,"name":"Sheet Metal Hydroforming Press","software":"3ds Max, Substance Painter, RizomUV","polys":"12157","verts":"13748","desc":"","src":"img/models/smhp.webp","wire":"img/models/smhp_wire.webp","uv":"img/models/smhp_uv.webp"},{"id":1778510441799,"name":"Powder Coating Conveyor Line","software":"3ds Max, Substance Painter, RizomUV","polys":"39359","verts":"48441","desc":"","src":"img/models/pccl.webp","wire":"img/models/pccl_wire.webp","uv":"img/models/pccl_uv.webp"},{"id":1778510441800,"name":"Exchange Dining Chair","software":"3ds Max, Substance Painter, RizomUV","polys":"4108","verts":"4418","desc":"","src":"img/models/edc.webp","wire":"img/models/edc_wire.webp","uv":"img/models/edc_uv.webp"},{"id":1778510441801,"name":"Wayne Wheeled Sideboard","software":"3ds Max, Substance Painter, RizomUV","polys":"5200","verts":"5476","desc":"","src":"img/models/wws.webp","wire":"img/models/wws_wire.webp","uv":"img/models/wws_uv.webp"},{"id":1778510441802,"name":"Sport Bicycle Wall Decor","software":"3ds Max, Substance Painter, RizomUV","polys":"4465","verts":"4560","desc":"","src":"img/models/sbwd.webp","wire":"img/models/sbwd_wire.webp","uv":"img/models/sbwd_uv.webp"},{"id":1778510441803,"name":"Vinta Side Table","software":"3ds Max, Substance Painter, RizomUV","polys":"1840","verts":"1830","desc":"","src":"img/models/vst.webp","wire":"img/models/vst_wire.webp","uv":"img/models/vst_uv.webp"},{"id":1778510441804,"name":"Manaos Sideboard","software":"3ds Max, Substance Painter, RizomUV","polys":"754","verts":"806","desc":"","src":"img/models/ms.webp","wire":"img/models/ms_wire.webp","uv":"img/models/ms_uv.webp"},{"id":1778510441805,"name":"Alpilles Terracotta Planter","software":"3ds Max, Substance Painter, RizomUV","polys":"960","verts":"962","desc":"","src":"img/models/atp.webp","wire":"img/models/atp_wire.webp","uv":"img/models/atp_uv.webp"},{"id":1778510441806,"name":"Lampatron Rubie Lamp","software":"3ds Max, Substance Painter, RizomUV","polys":"5199","verts":"5486","desc":"","src":"img/models/lrl.webp","wire":"img/models/lrl_wire.webp","uv":"img/models/lrl_uv.webp"},{"id":1778510441807,"name":"Radius Two Drawer Nightstand","software":"3ds Max, Substance Painter, RizomUV","polys":"1048","verts":"1218","desc":"","src":"img/models/rtdn.webp","wire":"img/models/rtdn_wire.webp","uv":"img/models/rtdn_uv.webp"},{"id":1778510441809,"name":"Walnut Crescent Lounge","software":"3ds Max, Substance Painter, RizomUV","polys":"3163","verts":"3175","desc":"","src":"img/models/wcl.webp","wire":"img/models/wcl_wire.webp","uv":"img/models/wcl_uv.webp"},{"id":1778510441810,"name":"Sandstone Side Table","software":"3ds Max, Substance Painter, RizomUV","polys":"1528","verts":"1570","desc":"","src":"img/models/sst.webp","wire":"img/models/sst_wire.webp","uv":"img/models/sst_uv.webp"},{"id":1778510441811,"name":"Bar Stool Cane Seat","software":"3ds Max, Substance Painter, RizomUV","polys":"1840","verts":"1920","desc":"","src":"img/models/bswcs.webp","wire":"img/models/bswcs_wire.webp","uv":"img/models/bswcs_uv.webp"},{"id":1778510441812,"name":"Coffee Table With Ottomans","software":"3ds Max, Substance Painter, RizomUV","polys":"3762","verts":"3924","desc":"","src":"img/models/ctwo.webp","wire":"img/models/ctwo_wire.webp","uv":"img/models/ctwo_uv.webp"},{"id":1778510441813,"name":"Rotula Floor Lamp","software":"3ds Max, Substance Painter, RizomUV","polys":"1894","verts":"2094","desc":"","src":"img/models/rfl.webp","wire":"img/models/rfl_wire.webp","uv":"img/models/rfl_uv.webp"},{"id":1778510441814,"name":"Satellite Chandelier","software":"3ds Max, Substance Painter, RizomUV","polys":"2215","verts":"2413","desc":"","src":"img/models/sach.webp","wire":"img/models/sach_wire.webp","uv":"img/models/sach_uv.webp"},{"id":1778510441815,"name":"Eve Dining Chair","software":"3ds Max, Substance Painter, RizomUV","polys":"1408","verts":"1452","desc":"","src":"img/models/evdc.webp","wire":"img/models/evdc_wire.webp","uv":"img/models/evdc_uv.webp"},{"id":1778510441817,"name":"Black wooden storage with painted foliage motif","software":"3ds Max, Substance Painter, RizomUV","polys":"1258","verts":"1406","desc":"","src":"img/models/bwswpf.webp","wire":"img/models/bwswpf_wire.webp","uv":"img/models/bwswpf_uv.webp"}];
 </script>
 
-<div id="cur-dot" style="left: 1579px; top: 889px; opacity: 1;"></div>
-<div id="cur-ring" class="hov" style="left: 1579px; top: 889px;"></div>
-<div id="cur-label" style="left: 1579px; top: 889px;" class="">+</div>
+<div id="cur-dot" style="left: 1573px; top: 885px; opacity: 1;"></div>
+<div id="cur-ring" class="hov" style="left: 1573px; top: 885px;"></div>
+<div id="cur-label" style="left: 1573px; top: 885px;" class="">+</div>
 <input type="file" id="fileInput" accept="image/*" multiple="">
-<div class="toast" id="toast">Опубликовано на GitHub! ~1 мин</div>
+<div class="toast" id="toast">Добро пожаловать!</div>
 
 <div id="lb" class="">
   <button class="lb-x" id="lbX">✕ ESC</button>
@@ -517,7 +543,42 @@ const DEF_MOD=[{"id":1778510441790,"name":"New York Corner Building Restaurant",
     <a href="mailto:thezaitcev@yandex.ru" class="nav-btn ghost">Email</a>
     <a href="tel:+79990012329" class="nav-btn ghost">+7 999 001 23 29</a>
   </div>
+  <a href="https://t.me/sergei00123" class="nav-tg-mobile" target="_blank">Telegram</a>
+  <button class="nav-burger" id="navBurger" aria-label="Меню">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="nav-mobile" id="navMobile">
+  <a href="#portfolio" class="nav-mobile-link">Портфолио</a>
+  <a href="#models" class="nav-mobile-link">Модели</a>
+  <a href="#skills" class="nav-mobile-link">Софт</a>
+  <a href="#contact" class="nav-mobile-link">Контакты</a>
+  <div class="nav-mobile-contacts">
+    <a href="https://t.me/sergei00123" target="_blank">Telegram</a>
+    <a href="mailto:thezaitcev@yandex.ru">Email</a>
+    <a href="tel:+79990012329">+7 999 001 23 29</a>
+  </div>
+</div>
+
+<script>
+(function(){
+  const burger = document.getElementById('navBurger');
+  const menu = document.getElementById('navMobile');
+  burger.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  document.querySelectorAll('.nav-mobile-link, .nav-mobile-contacts a').forEach(a => {
+    a.addEventListener('click', () => {
+      menu.classList.remove('open');
+      burger.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+})();
+</script>
 
 <section class="hero">
   <div class="hero-img" style="background-image: url(&quot;img/82_hs_46.webp&quot;); transform: translateY(0px);"></div>
