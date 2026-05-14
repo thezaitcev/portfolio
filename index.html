@@ -1697,12 +1697,18 @@ function renderModels(){
       th._scrollStart=inner.scrollLeft;
     },{passive:true});
     th.addEventListener('touchend',e=>{
-      /* On touch devices thumb tap is disabled — navigation via swipe on main image.
-         This prevents accidental model switch while scrolling the thumb strip. */
-    },{passive:true});
+      if(e.target.closest('.ms-thumb-controls'))return;
+      /* Allow tap only if thumb strip didn't scroll */
+      const scrollDelta=Math.abs(inner.scrollLeft-(th._scrollStart||inner.scrollLeft));
+      const touchDx=Math.abs(e.changedTouches[0].clientX-(th._txStart||e.changedTouches[0].clientX));
+      const touchDy=Math.abs(e.changedTouches[0].clientY-(th._tyStart||e.changedTouches[0].clientY));
+      if(scrollDelta>8||touchDx>12||touchDy>20)return;
+      e.preventDefault();
+      goModel(idx);
+    },{passive:false});
     th.addEventListener('click',e=>{
       if(e.target.closest('.ms-thumb-controls'))return;
-      if('ontouchstart' in window)return; /* on touch devices use swipe, not tap */
+      if('ontouchstart' in window)return; /* touch handled via touchend above */
       if(th._touched){th._touched=false;return;}
       const dx=Math.abs(e.clientX-(th._mdX||e.clientX));
       const dy=Math.abs(e.clientY-(th._mdY||e.clientY));
