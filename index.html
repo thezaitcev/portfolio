@@ -687,9 +687,9 @@ const DEF_IND_GAL=[{"id":1778510441997,"src":"img/ind/apr1.webp","badges":[]},{"
 const DEF_COM_GAL=[{"id":1778510442050,"src":"img/com/sashaskvo.webp"},{"id":1778510442049,"src":"img/com/cedar3.webp"},{"id":1778510442048,"src":"img/com/omnisandiego_event.webp"},{"id":1778510442054,"src":"img/com/omnisandiego_coffe.webp"},{"id":1778510442046,"src":"img/com/omnisandiego.webp"},{"id":1778510442052,"src":"img/com/planernaya_milk.webp"},{"id":1778510442057,"src":"img/com/planernaya_fish_1.webp"},{"id":1778510442058,"src":"img/com/planernaya_fish_2.webp"},{"id":1778510442045,"src":"img/com/bargation.webp"},{"id":1778510442047,"src":"img/com/sennoi_int.webp"},{"id":1778510442051,"src":"img/com/pyatigorsk.webp"},{"id":1778510442055,"src":"img/com/pyatigorsk (1).webp"},{"id":1778510442056,"src":"img/com/pyatigorsk (4).webp"},{"id":1778510442053,"src":"img/com/vishnyaki_int.webp"}];
 </script>
 
-<div id="cur-dot" style="left: 1214px; top: 40px; opacity: 1;"></div>
-<div id="cur-ring" class="" style="left: 1214px; top: 41px;"></div>
-<div id="cur-label" style="left: 1214px; top: 41px;" class="">+</div>
+<div id="cur-dot" style="left: 960px; top: 1px; opacity: 1;"></div>
+<div id="cur-ring" class="" style="left: 969px; top: 19px;"></div>
+<div id="cur-label" style="left: 969px; top: 19px;" class="">+</div>
 <input type="file" id="fileInput" accept="image/*" multiple="">
 <div class="toast" id="toast">Добро пожаловать!</div>
 
@@ -812,7 +812,7 @@ const DEF_COM_GAL=[{"id":1778510442050,"src":"img/com/sashaskvo.webp"},{"id":177
 </script>
 
 <section class="hero">
-  <div class="hero-img" style="background-image: url(&quot;img/82_hs_46.webp&quot;); transform: translateY(245px);"></div>
+  <div class="hero-img" style="background-image: url(&quot;img/82_hs_46.webp&quot;); transform: translateY(280px);"></div>
   <div class="hero-overlay"></div>
   <div class="hero-bottom-grad"></div>
   <div class="hero-content">
@@ -3277,7 +3277,7 @@ function renderVideos() {
     card.dataset.vk   = item.vk   || '';
     card.dataset.badge = item.badge || '';
 
-    const thumb = getSrc(item,'thumb') || '';
+    const thumb = getSrc(item,'thumb') || (item.thumbFilename ? 'img/video/' + item.thumbFilename : '');
     const tags = (item.sub||'').split(/[,·|]/).map(t=>t.trim()).filter(Boolean);
     const tagsHtml = tags.length ? `<div class="vid-tags">${tags.map(t=>`<span class="vid-tag">${escHtml(t)}</span>`).join('')}</div>` : '';
     card.innerHTML = `
